@@ -1,0 +1,392 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --ink-900: #1b2a4a;
+  --ink-700: #2f4368;
+  --paper-100: #faf7f0;
+  --paper-200: #f1ecdf;
+  --paper-300: #e3dac4;
+  --seal-600: #a3312b;
+  --seal-700: #7e2521;
+  --line: #d8cfb8;
+  --ok-600: #3f6b4a;
+
+  --font-display: 'Lora', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+
+  --radius: 6px;
+  --shadow-card: 0 1px 2px rgba(27, 42, 74, 0.06), 0 8px 24px -12px rgba(27, 42, 74, 0.18);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 48px 24px;
+  background:
+    radial-gradient(1200px 600px at 50% -10%, #ffffff, var(--paper-100) 60%);
+  color: var(--ink-900);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+/* ---------- Encabezado tipo "boletín" ---------- */
+.container::before {
+  content: "Registro de Alumnos";
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(28px, 4vw, 38px);
+  color: var(--ink-900);
+  border-bottom: 3px solid var(--ink-900);
+  padding-bottom: 14px;
+  margin-bottom: 4px;
+  letter-spacing: 0.2px;
+}
+
+/* ---------- Tarjetas ---------- */
+.card {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-card);
+  padding: 28px 30px;
+  position: relative;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: var(--ink-900);
+  border-radius: var(--radius) 0 0 var(--radius);
+}
+
+.card h2 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 21px;
+  margin: 0 0 20px 0;
+  color: var(--ink-900);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card h2::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: var(--line);
+}
+
+/* ---------- Formulario ---------- */
+.form-grid {
+  display: grid;
+  grid-template-columns: 0.7fr 1.2fr 1.2fr 1.2fr auto;
+  gap: 14px;
+  align-items: end;
+}
+
+.form-grid input[type="text"] {
+  width: 100%;
+  padding: 11px 12px;
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  color: var(--ink-900);
+  background: var(--paper-100);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-grid input[type="text"]::placeholder {
+  color: #9a8f78;
+}
+
+.form-grid input[type="text"]:focus {
+  border-color: var(--ink-700);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(47, 67, 104, 0.12);
+}
+
+.form-grid input[type="submit"] {
+  padding: 11px 22px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14px;
+  color: #fff;
+  background: var(--ink-900);
+  border: 1px solid var(--ink-900);
+  border-radius: var(--radius);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+
+.form-grid input[type="submit"]:hover { background: var(--ink-700); }
+.form-grid input[type="submit"]:active { transform: translateY(1px); }
+
+@media (max-width: 760px) {
+  .form-grid { grid-template-columns: 1fr; }
+}
+
+/* ---------- Tabla de listado ---------- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14.5px;
+}
+
+thead th {
+  text-align: left;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-700);
+  background: var(--paper-200);
+  padding: 12px 14px;
+  border-top: 1px solid var(--line);
+  border-bottom: 2px solid var(--ink-900);
+}
+
+thead th:first-child { border-top-left-radius: var(--radius); }
+thead th:last-child { border-top-right-radius: var(--radius); }
+
+tbody td {
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink-900);
+  vertical-align: middle;
+}
+
+tbody tr:hover { background: var(--paper-100); }
+tbody tr:last-child td { border-bottom: none; }
+
+tbody td form { margin: 0; }
+
+/* ---------- Botones de acción dentro de la tabla ---------- */
+.btn-edit,
+.btn-delete {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12.5px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-edit {
+  background: #eef1f7;
+  color: var(--ink-700);
+  border-color: #ccd5e6;
+}
+.btn-edit:hover { background: var(--ink-700); color: #fff; }
+
+.btn-delete {
+  background: #faecea;
+  color: var(--seal-700);
+  border-color: #f0c9c4;
+}
+.btn-delete:hover { background: var(--seal-600); color: #fff; }
+
+/* ---------- Estado vacío opcional ---------- */
+tbody:empty::after {
+  content: "Aún no hay alumnos registrados.";
+}
+
+/* ---------- Barra de usuario / sesión ---------- */
+.userbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  font-size: 14px;
+  color: var(--ink-700);
+}
+
+.userbar form { margin: 0; }
+
+.estado {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+.estado-activo {
+  background: #e6f1e9;
+  color: var(--ok-600);
+  border: 1px solid #bfe0c9;
+}
+
+.estado-inactivo {
+  background: #f1ecdf;
+  color: #8a7f66;
+  border: 1px solid var(--line);
+}
+
+.btn-logout {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--ink-700);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.btn-logout:hover {
+  background: var(--seal-600);
+  border-color: var(--seal-600);
+  color: #fff;
+}
+
+/* ---------- Páginas de login / registro ---------- */
+.auth-container {
+  max-width: 420px;
+}
+
+.auth-container::before {
+  content: none;
+}
+
+.auth-card h2 {
+  justify-content: center;
+}
+
+.auth-card h2::after {
+  content: none;
+}
+
+.form-auth {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-auth label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-700);
+}
+
+.form-auth input[type="text"],
+.form-auth input[type="email"],
+.form-auth input[type="password"] {
+  width: 100%;
+  padding: 11px 12px;
+  font-family: var(--font-body);
+  font-size: 14.5px;
+  color: var(--ink-900);
+  background: var(--paper-100);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  outline: none;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+}
+
+.form-auth input:focus {
+  border-color: var(--ink-700);
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(47, 67, 104, 0.12);
+}
+
+.form-auth input[type="submit"] {
+  margin-top: 4px;
+  padding: 12px 22px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 14.5px;
+  color: #fff;
+  background: var(--ink-900);
+  border: 1px solid var(--ink-900);
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: background 0.15s ease, transform 0.05s ease;
+}
+
+.form-auth input[type="submit"]:hover { background: var(--ink-700); }
+.form-auth input[type="submit"]:active { transform: translateY(1px); }
+
+.auth-switch {
+  text-align: center;
+  margin: 18px 0 0 0;
+  font-size: 13.5px;
+  color: var(--ink-700);
+}
+
+.auth-switch a {
+  color: var(--seal-600);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.auth-switch a:hover { text-decoration: underline; }
+
+.msg-error {
+  background: #faecea;
+  color: var(--seal-700);
+  border: 1px solid #f0c9c4;
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  font-size: 13.5px;
+  margin: 0 0 16px 0;
+}
+
+.msg-ok {
+  background: #e6f1e9;
+  color: var(--ok-600);
+  border: 1px solid #bfe0c9;
+  border-radius: var(--radius);
+  padding: 10px 14px;
+  font-size: 13.5px;
+  margin: 0 0 16px 0;
+}
+
+.temporizador {
+  text-align: center;
+  font-weight: 600;
+  font-size: 13.5px;
+  color: var(--ink-700);
+  background: var(--paper-100);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 8px 14px;
+  margin: 0 0 16px 0;
+  transition: color 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.temporizador-critico {
+  color: var(--seal-700);
+  background: #faecea;
+  border-color: #f0c9c4;
+}
+
+.temporizador-agotado {
+  color: var(--seal-700);
+  background: #faecea;
+  border-color: #f0c9c4;
+}
